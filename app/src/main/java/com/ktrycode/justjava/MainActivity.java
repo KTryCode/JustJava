@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * This app displays an order form to order coffee.
@@ -21,11 +22,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method is called when the order button is clicked.
      */
-    private int orderedCoffees=0;
 
     public void submitOrder(View view) {
-        orderedCoffees++;
-        display(orderedCoffees);
+        int numberOfCoffees =0;
+        numberOfCoffees++;
+        display(numberOfCoffees);
+        displayPrice(numberOfCoffees);
     }
 
     /**
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void displayPrice(int number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+        //priceTextView.setText(NumberFormat.getCurrencyInstance().format(price));
+        priceTextView.setText(NumberFormat.getCurrencyInstance(Locale.US).format(number*10));
     }
 }
