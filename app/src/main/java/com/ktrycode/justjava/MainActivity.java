@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int quantity =0;
 
+
     public void incrementNumberOfCoffees(View view){
         quantity++;
         display(quantity);
@@ -34,24 +35,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        displayPrice(quantity*5);
+        if (quantity>0) {
+            displayPrice(quantity * 5);
+        } else{
+            String priceMessage = "Free!";
+            displayMessage(priceMessage);
+        }
+
     }
 
-    /**
-     * This method displays the given quantity value on the screen.
-     */
     private void display(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
 
-    /**
-     * This method displays the given price on the screen.
-     */
+
     private void displayPrice(int number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         //priceTextView.setText(NumberFormat.getCurrencyInstance().format(price));
         priceTextView.setText(NumberFormat.getCurrencyInstance(Locale.US).format(number));
+    }
+
+    private void displayMessage(String text){
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(text);
     }
 
 }
