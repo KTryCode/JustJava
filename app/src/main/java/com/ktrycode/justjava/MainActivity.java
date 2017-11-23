@@ -19,15 +19,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /**
-     * This method is called when the order button is clicked.
-     */
     private int quantity =0;
 
-    public void submitOrder(View view) {
-
+    public void incrementNumberOfCoffees(View view){
         quantity++;
         display(quantity);
+    }
+
+    public void decrementNumberOfCoffees(View view){
+        if (quantity>0) {
+            quantity--;
+            display(quantity);
+        }
+    }
+
+    public void submitOrder(View view) {
         displayPrice(quantity*5);
     }
 
@@ -47,4 +53,5 @@ public class MainActivity extends AppCompatActivity {
         //priceTextView.setText(NumberFormat.getCurrencyInstance().format(price));
         priceTextView.setText(NumberFormat.getCurrencyInstance(Locale.US).format(number));
     }
+
 }
