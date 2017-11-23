@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
             displayPrice(quantity * 5);
         } else{
             String priceMessage = "Free!";
+            String costam = " ,Enjoy!";
+            priceMessage=priceMessage+costam;
             displayMessage(priceMessage);
         }
 
