@@ -20,47 +20,67 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int quantity =0;
-
+    private int price=0;
+    private final int cupCost=5;
+    String nameOfCustomer="Krystian";
 
     public void incrementNumberOfCoffees(View view){
         quantity++;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     public void decrementNumberOfCoffees(View view){
         if (quantity>0) {
             quantity--;
-            display(quantity);
+            displayQuantity(quantity);
         }
     }
 
     public void submitOrder(View view) {
         if (quantity>0) {
-            displayPrice(quantity * 5);
+            price=  calculatePrice();
+            displayMessage(createOrderSummary(price));
         } else{
             String priceMessage = "Free!";
-            String costam = " Enjoy! \nCoffee quantity: " + quantity;
-            priceMessage=priceMessage+costam;
             displayMessage(priceMessage);
         }
 
     }
 
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
 
 
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+    private String displayPrice(int number) {
+        //TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         //priceTextView.setText(NumberFormat.getCurrencyInstance().format(price));
-        priceTextView.setText(NumberFormat.getCurrencyInstance(Locale.US).format(number));
+        //priceTextView.setText(NumberFormat.getCurrencyInstance(Locale.US).format(number));
+        return NumberFormat.getCurrencyInstance(Locale.US).format(number);
     }
 
     private void displayMessage(String text){
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(text);
+    }
+    private void calculatePrice(int quantity1,int costPerCup){
+        this.price=quantity1*costPerCup;
+    }
+    private int calculatePrice(){
+        return quantity*cupCost;
+    }
+    private void calculatePrice(int quantity1){
+        this.price=quantity1*10;
+    }
+
+    private String createOrderSummary(int cost){
+        String message;
+        message = "Name: " + nameOfCustomer +
+                "\nQuantity: " + quantity +
+                "\nTotal: " + displayPrice(cost) +
+                "\nThank you!";
+        return message;
     }
 
 }
